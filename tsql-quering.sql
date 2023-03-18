@@ -123,20 +123,18 @@ SELECT orderid, orderdate, empid, custid,
       WHERE o2.orderid > o1.orderid) AS nextmonth
 FROM Sales.Orders AS o1
 
---------End topic4---------------------------------
 
 
------Topic 5 --------------------------------------
+----------------------------------------------------
 
---1-1
+
 SELECT 
 empid, MAX(orderdate) AS maxOrdeDate
 FROM Sales.Orders
 GROUP BY empid 
 
 
---1-2--------------------------------------------
-
+----------------------------------------------
 
 SET STATISTICS IO ON;
 SET NOCOUNT ON;
@@ -330,7 +328,7 @@ FROM (SELECT empid, custid, qty
       FROM dbo.Orders) AS D
   PIVOT(SUM(qty) FOR empid IN([1], [2], [3])) AS P;
 
-   ----4---------------------------------------------------------- 
+   -------------------------------------------------------------- 
 
    DROP TABLE IF EXISTS dbo.EmpYearOrders;
 
