@@ -92,7 +92,7 @@ OUTER APPLY  -- using outer apply to exclude unnnesesery lines
 
 SELECT *, DATEADD(HOUR,TakeBreakWithin, t.START_TIME_WORK) AS  TAKE_BREAK_WITHIN_TIME 
 FROM cte t
-OUTER APPLY  -- using cross apply to show all lines for researching task
+OUTER CROSS  -- using cross apply to show all lines for researching task
    (SELECT *
    FROM @BreakRules
    WHERE  BreakRequiredAfter*60   < (t.SUM_WORK_MINUTES + REST_SUM) AND  DATEADD(HOUR,TakeBreakWithin, t.START_TIME_WORK) < t.EndDate  AND MinBreakMinutes >  t.REST_SUM) as r   -- main logic of task
