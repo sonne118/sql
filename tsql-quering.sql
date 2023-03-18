@@ -1,4 +1,4 @@
-------Topic4 of funfamental T-SQL---------------------
+--------------------------------------------------------
 
 SELECT  orderid
       ,custid
@@ -149,14 +149,14 @@ FROM Sales.Orders
 GROUP BY empid) AS D
 ON D.empid = O.empid AND  D.maxOrdeDate = O.orderdate
 
---2-1-------------------------------------------
+------------------------------------------------
 
 
 SELECT orderid, orderdate, custid, empid,
 ROW_NUMBER() OVER(ORDER BY orderdate,  orderid  ) AS rownum
 FROM Sales.Orders
 
---2-2-------------------------------------------
+------------------------------------------------
 
 WITH  rowCTE AS
 (
@@ -170,7 +170,7 @@ WHERE rownum BETWEEN 11 AND 20
 --ORDER BY orderdate,  orderid
 --OFFSET 10 ROWS FETCH FIRST 10 ROWS ONLY;  
 
----3---------------------------------------------
+-------------------------------------------------
 
 WITH chainCTE AS
 (
@@ -188,7 +188,8 @@ FROM chainCTE AS P
 SELECT empid, mgrid, firstname, lastname
 FROM chainCTE
 
----4-1----------------------------------------
+----------------------------------------------
+
 USE TSQL2012
 IF OBJECT_ID('Sales.VEmpOrders') IS NOT NULL
   DROP VIEW Sales.VEmpOrders;
@@ -209,7 +210,7 @@ ORDER BY  empid, orderyear
 
 --ALTER VIEW Sales.VEmpOrders 
 
---4-2----------------------------------------
+---------------------------------------------
 
 SELECT empid, orderyear, qty,
 SUM(qty) OVER(PARTITION BY empid ORDER BY orderyear) AS runqty
@@ -223,7 +224,7 @@ SELECT empid, orderyear, qty,
 	  FROM Sales.VEmpOrders as v1
 ORDER BY  empid, orderyear
 
-----5-1---------------------------------------
+----------------------------------------------
 
 USE TSQL2012
 IF OBJECT_ID('Production.TopProduct') IS NOT NULL
@@ -253,13 +254,13 @@ GO
 
 SELECT * FROM Production.TopProduct(5,2)
 
-----5-2---------------------------------------
+----------------------------------------------
 SELECT S.supplierid, S.companyname, P.productid, P.productname, P.unitprice
 FROM Production.Suppliers AS S
   CROSS APPLY Production.TopProduct(S.supplierid, 2) AS P;
 
 
-----------------Topic 6----------------------------------
+-------------------------------------------------------
 
  SELECT orderid, custid, val,
   SUM(val) OVER() AS totalvalue,
@@ -286,21 +287,21 @@ FROM (SELECT empid, custid, qty
       FROM dbo.Orders) AS D
   PIVOT(SUM(qty) FOR empid IN([1], [2], [3])) AS P;
 
-  ----excersices Topic 6--------------------------------
+  -------------------------------------------------------------
    -----1------
 
    SELECT  *,
    RANK() OVER(PARTITION BY custid ORDER BY qty) AS drnk
    FROM dbo.Orders 
 
-   -----2------
+   -----2------------------------------------------------------
 
    SELECT  *,
    qty-LAG(qty) OVER(PARTITION BY custid ORDER BY qty) AS difnext,
    qty-LEAD(qty) OVER(PARTITION BY custid ORDER BY qty) AS diffprev
    FROM dbo.Orders 
 
-   -----3-----
+   -----3-------------------------------------------------------
 
    -- Using standard solution
    SELECT empid,
@@ -329,7 +330,7 @@ FROM (SELECT empid, custid, qty
       FROM dbo.Orders) AS D
   PIVOT(SUM(qty) FOR empid IN([1], [2], [3])) AS P;
 
-   ----4------ 
+   ----4---------------------------------------------------------- 
 
    DROP TABLE IF EXISTS dbo.EmpYearOrders;
 
@@ -351,7 +352,7 @@ FROM (SELECT empid, custid, qty
 
 	SELECT * FROM dbo.EmpYearOrders;
 
-	 ------------
+	 --------------------------------------------------------
 
 	 SELECT empid, CAST(RIGHT(yearorder,4) AS INT), numorders
 	 FROM dbo.EmpYearOrders
