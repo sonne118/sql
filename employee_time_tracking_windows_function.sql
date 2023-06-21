@@ -1,52 +1,3 @@
-DECLARE @Timecards TABLE(	
-		ID int Identity(1,1),	
-		BusinessDate smalldatetime ,
-		StartDate datetime ,
-		EndDate datetime,
-		EmployeeID uniqueidentifier  	
-)
-DECLARE @BreakRules TABLE(	
-	ID int Identity(1,1),	
-	MinBreakMinutes int  ,
-	BreakRequiredAfter  decimal(10,2) ,
-	TakeBreakWithin  decimal(10,2) 
-)
-
--- fill timecards
-DECLARE @EmployeeID uniqueidentifier 
-DECLARE @BusinessDate smalldatetime
-
-SET @EmployeeID =newid()
-set @BusinessDate ='2/28/2023'
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/28/2023 5:55','2/28/2023 9:24')
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/28/2023 9:55','2/28/2023 16:18')
---Values(@EmployeeID, @BusinessDate,'2/28/2023 9:50','2/28/2023 16:18')
-set @BusinessDate= '2/27/2023'
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/27/2023 6:00','2/27/2023 17:20')
---Values(@EmployeeID, @BusinessDate,'2/27/2023 6:00','2/27/2023 19:20')
-SET @EmployeeID =newid()
-set @BusinessDate ='2/28/2023'
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/28/2023 5:20','2/28/2023 8:30')
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/28/2023 8:45','2/28/2023 13:03')
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/28/2023 13:33','2/28/2023 17:00')
---Values(@EmployeeID, @BusinessDate,'2/28/2023 13:15','2/28/2023 17:00')
-INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
-Values(@EmployeeID, @BusinessDate,'2/28/2023 17:25','2/28/2023 19:00')
-
--- fill rules
-INSERT INTO @BreakRules (MinBreakMinutes ,	BreakRequiredAfter   ,	TakeBreakWithin)
-Values(30,6,5)
-INSERT INTO @BreakRules (MinBreakMinutes ,	BreakRequiredAfter   ,	TakeBreakWithin)
-Values(30,9,9)
-INSERT INTO @BreakRules (MinBreakMinutes ,	BreakRequiredAfter   ,	TakeBreakWithin)
-Values(30,12,11)
-
 
 -------------------------------------query to run------------------------------------------------------------------------------------
 
@@ -108,6 +59,54 @@ FROM @BreakRules
 
 -------------------------------------------------------------------------------------------------------------------------
 
+DECLARE @Timecards TABLE(	
+		ID int Identity(1,1),	
+		BusinessDate smalldatetime ,
+		StartDate datetime ,
+		EndDate datetime,
+		EmployeeID uniqueidentifier  	
+)
+DECLARE @BreakRules TABLE(	
+	ID int Identity(1,1),	
+	MinBreakMinutes int  ,
+	BreakRequiredAfter  decimal(10,2) ,
+	TakeBreakWithin  decimal(10,2) 
+)
+
+-- fill timecards
+DECLARE @EmployeeID uniqueidentifier 
+DECLARE @BusinessDate smalldatetime
+
+SET @EmployeeID =newid()
+set @BusinessDate ='2/28/2023'
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/28/2023 5:55','2/28/2023 9:24')
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/28/2023 9:55','2/28/2023 16:18')
+--Values(@EmployeeID, @BusinessDate,'2/28/2023 9:50','2/28/2023 16:18')
+set @BusinessDate= '2/27/2023'
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/27/2023 6:00','2/27/2023 17:20')
+--Values(@EmployeeID, @BusinessDate,'2/27/2023 6:00','2/27/2023 19:20')
+SET @EmployeeID =newid()
+set @BusinessDate ='2/28/2023'
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/28/2023 5:20','2/28/2023 8:30')
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/28/2023 8:45','2/28/2023 13:03')
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/28/2023 13:33','2/28/2023 17:00')
+--Values(@EmployeeID, @BusinessDate,'2/28/2023 13:15','2/28/2023 17:00')
+INSERT INTO  @Timecards (EmployeeID, BusinessDate,	StartDate,	EndDate)
+Values(@EmployeeID, @BusinessDate,'2/28/2023 17:25','2/28/2023 19:00')
+
+-- fill rules
+INSERT INTO @BreakRules (MinBreakMinutes ,	BreakRequiredAfter   ,	TakeBreakWithin)
+Values(30,6,5)
+INSERT INTO @BreakRules (MinBreakMinutes ,	BreakRequiredAfter   ,	TakeBreakWithin)
+Values(30,9,9)
+INSERT INTO @BreakRules (MinBreakMinutes ,	BreakRequiredAfter   ,	TakeBreakWithin)
+Values(30,12,11)
 
 
 
